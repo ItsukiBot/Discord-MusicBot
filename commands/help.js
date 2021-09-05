@@ -2,13 +2,13 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "help",
-  description: "Information about the bot",
-  usage: "[command]",
+  description: "Menu bot",
+  usage: "[perintah]",
   permissions: {
     channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
     member: [],
   },
-  aliases: ["command", "commands", "cmd"],
+  aliases: ["command", "commands", "menu"],
   /**
    *
    * @param {import("../structures/DiscordMusicBot")} client
@@ -26,34 +26,34 @@ module.exports = {
 
     let Embed = new MessageEmbed()
             .setAuthor(
-              `Commands of ${client.user.username}`,
+              `「 ${client.user.username} 」`,
               client.botconfig.IconURL
             )
             .setColor("RANDOM")
             .setFooter(
-              `To get info of each command type ${
+              `Untuk mendapatkan info command silahkan ketik ${
                 GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
-              }help [Command] | Have a nice day!`
+              }help [perintah]`
             ).setDescription(`${Commands.join("\n")}
   
-  Discord Music Bot Version: v${require("../package.json").version}
-  [✨ Support Server](${
+  Versi Bot: v${require("../package.json").version}
+  [✨ Server](${
     client.botconfig.SupportServer
-  }) | [GitHub](https://github.com/SudhanPlayz/Discord-MusicBot) | By [SudhanPlayz](https://github.com/SudhanPlayz)`);
+  }) | [GitHub Owner](https://github.com/Adiixyz) | [Sc Bot Whatsapp](https://github.com/itsuki-chan/wa)`);
     if (!args[0]) message.channel.send(Embed);
     else {
       let cmd =
         client.commands.get(args[0]) ||
         client.commands.find((x) => x.aliases && x.aliases.includes(args[0]));
       if (!cmd)
-        return client.sendTime(message.channel, `❌ | Unable to find that command.`);
+        return client.sendTime(message.channel, `❌ | tidak dapat menemukan perintah itu`);
 
       let embed = new MessageEmbed()
-        .setAuthor(`Command: ${cmd.name}`, client.botconfig.IconURL)
+        .setAuthor(`Perintah ${cmd.name}`, client.botconfig.IconURL)
         .setDescription(cmd.description)
         .setColor("GREEN")
         //.addField("Name", cmd.name, true)
-        .addField("Aliases", `\`${cmd.aliases.join(", ")}\``, true)
+        .addField("Alias", `\`${cmd.aliases.join(", ")}\``, true)
         .addField(
           "Usage",
           `\`${GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix}${
@@ -70,7 +70,7 @@ module.exports = {
           true
         )
         .setFooter(
-          `Prefix - ${
+          `Prefix Untuk Perintah - ${
             GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
           }`
         );
@@ -82,9 +82,9 @@ module.exports = {
 SlashCommand: {
     options: [
       {
-        name: "command",
-        description: "Get information on a specific command",
-        value: "command",
+        name: "menu",
+        description: "List menu bot",
+        value: "menu",
         type: 3,
         required: false
       },
@@ -107,34 +107,34 @@ SlashCommand: {
   
       let Embed = new MessageEmbed()
             .setAuthor(
-              `Commands of ${client.user.username}`,
+              `[ ${client.user.username} ]`,
               client.botconfig.IconURL
             )
             .setColor("RANDOM")
             .setFooter(
-              `To get info of each command type ${
+              `Untuk mendapatkan info command silahkan ketik ${
                 GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix
-              }help [Command] | Have a nice day!`
+              }help [perintah]`
             ).setDescription(`${Commands.join("\n")}
   
-  Discord Music Bot Version: v${require("../package.json").version}
-  [✨ Support Server](${
+  Versi Bot : v${require("../package.json").version}
+  [✨ Server](${
     client.botconfig.SupportServer
-  }) | [GitHub](https://github.com/SudhanPlayz/Discord-MusicBot) | By [SudhanPlayz](https://github.com/SudhanPlayz)`);
+  }) | [GitHub Owner](https://github.com/Adiixyz) | [Sc Bot Whatsapp](https://github.com/Itsuki-chan/wa)`);
       if (!args) return interaction.send(Embed);
       else {
         let cmd =
           client.commands.get(args[0].value) ||
           client.commands.find((x) => x.aliases && x.aliases.includes(args[0].value));
         if (!cmd)
-          return client.sendTime(interaction, `❌ | Unable to find that command.`);
+          return client.sendTime(interaction, `❌ | tidak dapat menemukan perintah itu`);
   
         let embed = new MessageEmbed()
-          .setAuthor(`Command: ${cmd.name}`, client.botconfig.IconURL)
+          .setAuthor(`Perintah ${cmd.name}`, client.botconfig.IconURL)
           .setDescription(cmd.description)
           .setColor("GREEN")
           //.addField("Name", cmd.name, true)
-          .addField("Aliases", cmd.aliases.join(", "), true)
+          .addField("Alias", cmd.aliases.join(", "), true)
           .addField(
             "Usage",
             `\`${GuildDB ? GuildDB.prefix : client.botconfig.DefaultPrefix}${
